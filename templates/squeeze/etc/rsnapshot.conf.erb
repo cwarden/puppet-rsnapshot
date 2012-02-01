@@ -91,7 +91,7 @@ cmd_rsnapshot_diff	/usr/bin/rsnapshot-diff
 # i.e. hourly, daily, weekly, etc.      #
 #########################################
 
-interval	hourly	24
+#interval	hourly	24
 interval	daily	7
 interval	weekly	4
 interval	monthly	6
@@ -171,7 +171,7 @@ exclude		lost+found
 # This is the best way to support special files (FIFOs, etc) cross-platform.
 # The default is 0 (off).
 #
-#link_dest	0
+link_dest	1
 
 # When sync_first is enabled, it changes the default behaviour of rsnapshot.
 # Normally, when rsnapshot is called with its lowest interval
@@ -198,16 +198,6 @@ exclude		lost+found
 ###############################
 ### BACKUP POINTS / SCRIPTS ###
 ###############################
-<% t_hosts.each do |t_host| -%>
-backup	root@<%= t_host -%>:/boot/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/etc/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/home/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/opt/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/root/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/srv/			<%= t_host -%>/
-backup	root@<%= t_host -%>:/usr/local/bin/		<%= t_host -%>/
-backup	root@<%= t_host -%>:/usr/local/sbin/		<%= t_host -%>/
-backup	root@<%= t_host -%>:/var/backups/		<%= t_host -%>/
-backup	root@<%= t_host -%>:/var/spool/cron/crontabs/	<%= t_host -%>/
-
-<% end -%>
+backup	/opt/	localhost/
+backup	/etc/	localhost/
+backup	/var/lib/redis/	localhost/
